@@ -6,38 +6,58 @@
 //
 package week04;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Week04StringBuilderListSetMapLab {
 
     public static void main(String[] args) {
-
+      
         // 1. Why would we use a StringBuilder instead of a String?
         //      a. Instantiate a new StringBuilder
         //      b. Append the characters 0 through 9 to it separated by dashes
         //              Note:  make sure no dash appears at the end of the StringBuilder
+        StringBuilder sb = new StringBuilder();
         
+        for (int i = 0; i < 10; i++) {
+           if (i != 9) {
+             sb.append(i + "-");
+           }
+           else {
+             sb.append(i);
+           }
+        }
+        
+        System.out.println(sb.toString());
         
         // 2. List of String:
         //      a. Create a list of Strings 
         //      b. Add 5 Strings to it, each with a different length
-
+      List<String> strings = new ArrayList<String>();
+      strings.add("pink");
+      strings.add("orange");
+      strings.add("black");
+      strings.add("tangerine");
+      strings.add("co");
         
         // 3. Write and test a method that takes a list of strings 
         //          and returns the shortest string
-
+        System.out.println(findShortestString(strings));
         
         // 4. Write and test a method that takes a list of strings 
         //          and returns the list with the first and last element switched
-
+        System.out.println(swapStrings(strings));
         
         // 5. Write and test a method that takes a list of strings 
         //          and returns a string with all the list elements concatenated to each other,
         //          separated by a comma
-
+        System.out.println(concatStrings(strings));
         
         // 6. Write and test a method that takes a list of strings and a string 
         //          and returns a new list with all strings from the original list
         //          containing the second string parameter (i.e. like a search method)
-
+        String str = "pink";
+        System.out.println(searchStrings(strings, str));
         
         // 7. Write and test a method that takes a list of integers 
         //          and returns a List<List<Integer>> with the following conditions specified
@@ -122,19 +142,54 @@ public class Week04StringBuilderListSetMapLab {
 
     
     // Method 6:
-    
+    public static List<String> searchStrings(List<String> list, String query){
+      List<String> newList = new ArrayList<String>();
+      
+      for (String str : list) {
+        if (str.contains(query)) {
+          newList.add(str);
+        }
+      }      
+      
+      return newList;
+    }
 
     
     // Method 5:
-    
+    public static String concatStrings(List<String> strings){
+      StringBuilder concat = new StringBuilder();
+      
+      for (String str : strings) {
+        concat.append(str + ", ");
+      }
+      
+      return concat.toString();
+    }
     
     
     // Method 4:
-    
+    public static List<String> swapStrings(List<String> strings) {
+      
+      String temp = strings.get(0);
+      strings.set(0, strings.get(strings.size() - 1));
+      strings.set(strings.size() - 1, temp);
+      
+      return strings;
+    }
     
     
     // Method 3:
-    
+    public static String findShortestString(List<String> strings) {
+      String shortest = strings.get(0);
+      
+      for (String str : strings) {
+        if (str.length() < shortest.length()) {
+          shortest = str;
+        }
+      }
+      
+      return shortest;
+    }
     
 
 }
